@@ -6,6 +6,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Token } from './token.entity';
+import { Product } from './product.entity';
+import { Category } from './category.entity';
 
 export enum UserRole {
   BOSS = 'BOSS',
@@ -32,4 +34,13 @@ export class User {
 
   @OneToMany(() => Token, (token) => token.user)
   tokens?: Token[];
+
+  @OneToMany(() => Product, (product) => product.user)
+  products?: Product[];
+
+  @OneToMany(() => Category, (category) => category.user)
+  categories?: Category[];
+
+  @Column({ type: 'timestamp', default: new Date() })
+  createdAt: Date;
 }
