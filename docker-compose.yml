@@ -1,0 +1,23 @@
+version: '1.0'
+
+services:
+  db: # Database
+    image: postgres:14.3
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - POSTGRES_USER=$DATABASE_USER
+      - POSTGRES_PASSWORD=$DATABASE_PASSWORD
+      - POSTGRES_DB=$DATABASE_NAME
+    ports:
+      - $DATABASE_PORT:$DATABASE_PORT
+
+  api:  # Server
+    depends_on:
+      - db
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
