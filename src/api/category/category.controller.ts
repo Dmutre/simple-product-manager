@@ -1,42 +1,49 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Req, UseGuards } from "@nestjs/common";
-import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiTags } from "@nestjs/swagger";
-import { CategoryService } from "./category.service";
-import { CreateCategoryDTO } from "./dto/create-category.dto";
-import { CategoryResponse } from "./response/category.response";
-import { JwtGuard } from "src/security/jwt.guard";
-import { CategoryByIdPipe } from "./pipe/category-by-id.pipe";
-import { UpdateCategoryDTO } from "./dto/update-category.dto";
-import { MessageResponse } from "../auth/response/message.response";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiTags,
+} from '@nestjs/swagger';
+import { CategoryService } from './category.service';
+import { CreateCategoryDTO } from './dto/create-category.dto';
+import { CategoryResponse } from './response/category.response';
+import { JwtGuard } from 'src/security/jwt.guard';
+import { CategoryByIdPipe } from './pipe/category-by-id.pipe';
+import { UpdateCategoryDTO } from './dto/update-category.dto';
+import { MessageResponse } from '../auth/response/message.response';
 
 @Controller('category')
 @ApiTags('Category')
 export class CategoryController {
-
-  constructor(
-    private readonly categoryService: CategoryService,
-  ) {}
+  constructor(private readonly categoryService: CategoryService) {}
 
   @UseGuards(JwtGuard)
   @Post()
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Create category, that would belong to user' })
   @ApiOkResponse({ type: CategoryResponse })
-  createCategory (
-    @Req() request,
-    @Body() data: CreateCategoryDTO
-  ) {
+  createCategory(@Req() request, @Body() data: CreateCategoryDTO) {
     data.user = request.user;
     return this.categoryService.createCategory(data);
   }
-  
+
   @UseGuards(JwtGuard)
   @Get()
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get all categories of user' })
   @ApiOkResponse({ type: [CategoryResponse] })
-  getCategories(
-    @Req() request
-  ) {
+  getCategories(@Req() request) {
     return this.categoryService.getCategories(request.user);
   }
 
@@ -45,9 +52,7 @@ export class CategoryController {
   @ApiBearerAuth()
   @ApiOperation({ summary: 'Get category by id' })
   @ApiOkResponse({ type: CategoryResponse })
-  getCategoryById(
-    @Param('categoryId', CategoryByIdPipe) categoryId: string,
-  ) {
+  getCategoryById(@Param('categoryId', CategoryByIdPipe) categoryId: string) {
     return this.categoryService.getCategoryById(categoryId);
   }
 
@@ -58,10 +63,10 @@ export class CategoryController {
   @ApiOkResponse({ type: MessageResponse })
   async updateCategoryById(
     @Param('categoryId', CategoryByIdPipe) categoryId: string,
-    @Body() data: UpdateCategoryDTO
+    @Body() data: UpdateCategoryDTO,
   ) {
     await this.categoryService.updateCategory(categoryId, data);
-    return { message: 'Category updated' }
+    return { message: 'Category updated' };
   }
 
   @UseGuards(JwtGuard)
@@ -73,6 +78,6 @@ export class CategoryController {
     @Param('categoryId', CategoryByIdPipe) categoryId: string,
   ) {
     await this.categoryService.deleteCategory(categoryId);
-    return { message: 'Category deleted' }
+    return { message: 'Category deleted' };
   }
 }

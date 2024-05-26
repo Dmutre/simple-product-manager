@@ -22,7 +22,7 @@ describe('AuthService', () => {
     password: 'password',
     emailApproved: true,
     username: 'TestUser',
-    createdAt: new Date()
+    createdAt: new Date(),
   };
   const expiredToken = {
     id: '2',

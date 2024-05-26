@@ -4,6 +4,7 @@ import config from './config/config';
 import { DatabaseModule } from './database/database.module';
 import AuthModule from './api/auth/auth.module';
 import { CategoryModule } from './api/category/category.module';
+import { ProductModule } from './api/product/product.module';
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { CategoryModule } from './api/category/category.module';
     }),
     DatabaseModule,
     AuthModule,
-    CategoryModule
+    CategoryModule,
+    ProductModule,
   ],
 })
 export class AppModule {}

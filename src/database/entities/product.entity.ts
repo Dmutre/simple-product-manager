@@ -26,7 +26,10 @@ export class Product {
   @ManyToOne(() => User, (user) => user.products)
   user: User;
 
-  @ManyToOne(() => Category, (category) => category.products, { nullable: true, onDelete: 'SET NULL' })
+  @ManyToOne(() => Category, (category) => category.products, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
   category?: Category;
 
   @Column({ type: 'timestamp', default: new Date() })

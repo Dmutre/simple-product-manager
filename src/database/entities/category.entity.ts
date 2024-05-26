@@ -1,7 +1,13 @@
-import { Column, Entity, Generated, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { User } from "./user.entity";
-import { Product } from "./product.entity";
-
+import {
+  Column,
+  Entity,
+  Generated,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { User } from './user.entity';
+import { Product } from './product.entity';
 
 @Entity()
 export class Category {
