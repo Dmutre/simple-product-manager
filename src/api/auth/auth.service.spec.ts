@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import AuthService from './auth.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { User, UserRole } from '../../database/entities/user.entity';
+import { User } from '../../database/entities/user.entity';
 import { Token } from '../../database/entities/token.entity';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
@@ -21,8 +21,8 @@ describe('AuthService', () => {
     email: 'test@example.com',
     password: 'password',
     emailApproved: true,
-    role: UserRole.BOSS,
     username: 'TestUser',
+    createdAt: new Date()
   };
   const expiredToken = {
     id: '2',

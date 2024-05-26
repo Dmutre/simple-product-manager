@@ -1,5 +1,4 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { UserRole } from 'src/database/entities/user.entity';
 
 export class UserResponse {
   @ApiProperty({ description: 'User id' })
@@ -11,9 +10,9 @@ export class UserResponse {
   @ApiProperty({ description: 'User email' })
   email: string;
 
-  @ApiProperty({ description: 'User role', enum: UserRole })
-  role: UserRole;
+  @ApiProperty({ description: 'Email approving state' })
+  emailApproved: boolean;
 
-  @ApiPropertyOptional({ description: 'Boss id of user, can be null' })
-  bossId?: string;
+  @ApiProperty({ description: 'Date of creation' })
+  createdAt: Date;
 }

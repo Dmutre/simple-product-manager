@@ -9,11 +9,6 @@ import { Token } from './token.entity';
 import { Product } from './product.entity';
 import { Category } from './category.entity';
 
-export enum UserRole {
-  BOSS = 'BOSS',
-  EMPLOYEE = 'EMPLOYEE',
-}
-
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')

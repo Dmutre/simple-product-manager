@@ -8,7 +8,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import AuthService from './auth.service';
-import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { TokenResponse } from './response/token.response';
 import { MessageResponse } from './response/message.response';
@@ -80,6 +80,7 @@ export default class AuthController {
 
   @UseGuards(JwtGuard)
   @Get('/me')
+  @ApiBearerAuth()
   @ApiOkResponse({ type: UserResponse })
   @ApiOperation({ description: 'Get information about user' })
   getMe(@Req() request) {
