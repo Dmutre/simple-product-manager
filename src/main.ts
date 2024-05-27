@@ -6,11 +6,11 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
-  const configService = new ConfigService();
+  const app = await NestFactory.create(AppModule, { cors: true });
 
+  const configService = new ConfigService();
   const PORT = configService.get<number>('port') || 3000;
 
-  const app = await NestFactory.create(AppModule, { cors: true });
 
   app.useGlobalPipes(
     new ValidationPipe({
