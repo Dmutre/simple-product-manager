@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Product } from 'src/database/entities/product.entity';
+import { Product } from '../../database/entities/product.entity';
 import { CreateProductDTO } from './dto/create-product.dto';
 import { CategoryService } from '../category/category.service';
-import { InvalidEntityException } from 'src/utils/exceptions/InvalidEntityException';
-import { User } from 'src/database/entities/user.entity';
+import { InvalidEntityException } from '../../utils/exceptions/InvalidEntityException';
+import { User } from '../../database/entities/user.entity';
 import { UpdateProductDTO } from './dto/update-product.dto';
 
 @Injectable()
